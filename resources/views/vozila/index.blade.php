@@ -17,7 +17,7 @@
 
     <div class="bg-white shadow rounded p-6">
         <table class="min-w-full border">
-            <thead class="bg-gray-50">
+            <thead class="bg-blue-600 text-white px-4 py-2 text-left">
             <tr>
                 <th class="border px-3 py-2 text-left">ID</th>
                 <th class="border px-3 py-2 text-left">Naziv</th>
@@ -27,6 +27,8 @@
                 <th class="border px-3 py-2 text-left">Istek</th>
                 <th class="border px-3 py-2 text-left">Ostalo</th>
                 <th class="border px-3 py-2 text-left">Namjena</th>
+                <th class="border px-3 py-2 text-left">Kreirano</th>
+                <th class="border px-3 py-2 text-left">Ažurirano</th>
                 <th class="border px-3 py-2 text-left">Akcije</th>
             </tr>
             </thead>
@@ -43,6 +45,8 @@
                         {{ ceil(now()->diffInDays($v->istek_registracije, false)) }} dana
                     </td>
                     <td class="border px-3 py-2">{{ $v->namjena?->naziv ?? '—' }}</td>
+                    <td class="border px-3 py-2">{{ $v->created_at->format('d.m.Y H:i:s') }}</td>
+                    <td class="border px-3 py-2">{{ $v->updated_at->format('d.m.Y H:i:s') }}</td>
                     <td class="border px-3 py-2">
                         <a class="text-blue-600 hover:underline mr-3"
                            href="{{ route('vozila.edit', $v) }}">Uredi</a>
