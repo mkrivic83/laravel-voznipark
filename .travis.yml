@@ -1,0 +1,32 @@
+os: linux
+dist: jammy
+language: php
+
+php:
+  - "8.2"
+
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE laravel_test;'
+
+before_script:
+  - cp .env.example .env
+  - php artisan key:generate
+  - php artisan config:clear
+
+env:
+  global:
+    - APP_ENV=testing
+    - DB_CONNECTION=mysql
+    - DB_HOST=127.0.0.1
+    - DB_PORT=3306
+    - DB_DATABASE=laravel_test
+    - DB_USERNAME=root
+    - DB_PASSWORD=
+
+script:
+  - composer install --no-interaction --prefer-dist
+  - php artisan migrate --force
+  - php artisan test
